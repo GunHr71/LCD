@@ -1,0 +1,8 @@
+*.pdsbak
+*.pdsprj
+*.ccspjt
+LCD.x/build
+LCD.x/debug
+LCD.x/dist
+LCD.x/nbproject
+LCD.x/Makefile
