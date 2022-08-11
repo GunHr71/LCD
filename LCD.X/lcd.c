@@ -17,37 +17,46 @@
 #bit RBO = 0x06.0
 #bit RB1  = 0x06.1
 #bit RB2  = 0x06.2
+#define LCD_DATA_PORT getenv("SFR:PORTC")
 
 int main() {
-    lcd_init();
+    
     TRISC   = 0x00;       //Puerto C como salidas
     TRISB   = 0xFF;       //Puerto B como entrada 
     PORTC = 0x00;    //Puerto C a nivel bajo 
+    lcd_init();
     
     TRISA   = 0x00;      //Puerto A como salida
     PORTA = 0x00;    //Puerto A en nivel bajo
     
-    OP_REG = 0b00000000; //Activo el ~RBUP
-    //OPTION_REG = 0b00000001;
-    WPUB    = 0b00000111;   //los pull-up de r0,r1,r2 estan configurados
-     lcd_cursor_on(TRUE);
+    //OP_REG = 0b00000000; //Activo el ~RBUP
+    OP_REG = 0b00000001;
+    WPUB    = 0xFF;   //los pull-up de r0,r1,r2 estan configurados
+    lcd_cursor_on(TRUE);
+    lcd_gotoxy(1,1);
     
     while(1)
     {
-        if(RBO){
+        if(!RBO){
             lcd_putc("\f");
+            lcd_gotoxy(1,1);
             printf(lcd_putc, "LED 1");
             PORTA= 0b00000001;
+            //delay_ms(1000);
         }
-        else if(RB1){
+        else if(!RB1){
             lcd_putc("\f");
+            lcd_gotoxy(1,1);
             printf(lcd_putc, "LED 2");
             PORTA= 0b000000010;
+            //delay_ms(1000);
         }
-        else if(RB2){
+        else if(!RB2){
             lcd_putc("\f");
+            lcd_gotoxy(1,1);
             printf(lcd_putc, "LED 3");
             PORTA= 0b000000100;
+            //delay_ms(1000);
         }
     }
     return (0);

@@ -1,6 +1,7 @@
 *.pdsbak
 *.pdsprj
 *.ccspjt
+*.workspace 
 LCD.x/build
 LCD.x/debug
 LCD.x/dist
